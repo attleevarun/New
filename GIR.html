@@ -1,0 +1,347 @@
+<!doctype HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Shopping Cart</title>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!--Animation-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="CtrlGIR.js"></script>
+
+
+
+    <link rel="stylesheet" href="getitrightstyle.css" type="text/css">
+
+</head>
+
+<body ng-app="myapp" ng-controller="cartctrl">
+    <div class="container">
+        <nav class="navbar navbar-default well well-sm">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Get it Right</a>
+                    <img src="Images/trans_getitright.gif" class="img-responsive" alt="get it right logo">
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="nav navbar-nav" id="hmcrt">
+                        &nbsp;<button ng-click="prod()" class="btn btn-primary btn-sm" type="submit">Home</button><span class="sr-only">(current)</span>
+                        &nbsp;<button id="crtbtn" ng-click="cartpg()" class="btn btn-primary btn-sm" type="submit">Cart</button>
+                        <span class="sr-only">(current)</span>
+                    </div>
+                    <div class="nav navbar navbar-right" id="cart">
+                        <button ng-click="cartpg()" type="button" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-shopping-cart" id="cartfont"></span><span id="crt">&nbsp;Cart</span>&nbsp;<span style="color: aquamarine" class="badge">{{totalitems}}</span>
+                        </button>
+                    </div>
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <hr />
+        <div ng-show="prodpage" ng-class="active">
+            <header class="jumbotron well well-lg">
+                <h1>A Warm Welcome!</h1>
+                <p id="cheese">I love cheese, especially st. agur blue cheese rubber cheese. Manchego bocconcini cottage cheese queso airedale edam cheese on toast gouda. Cheesy grin rubber cheese hard cheese fromage ricotta who moved my cheese parmesan swiss. Goat jarlsberg dolcelatte when the cheese comes out everybody's happy boursin taleggio lancashire st. agur blue cheese. Dolcelatte bavarian bergkase babybel.</p>
+            </header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Featured Products</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item1}}</h4>
+                        <img class="image" ng-src="Images/Apple.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price1 | currency}}</p>
+                            <form name="quantity1">
+                                <div ng-hide="add1">
+                                    <p class="qnty">
+                                        <input id="qty1" ng-value="qty1" ng-model="qty1" type="number" name="points" autofocus step="1" min="0" max="5" />
+                                        <button ng-disabled="((qty1==0) || (qty1<0) || (qty1>5) || quantity1.$invalid)" ng-click="add1=true; addtocart(item1, qty1, price1, 'add1')" ng-model="addtocart1" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add1">
+                                    <span>{{qty1}} item(s) added</span>
+                                    <button ng-click="add1=false; showhidetoggle1(); emptybox(item1, qty1, price1); qty1=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item2}}</h4>
+                        <img class="image" ng-src="Images/BlackBerry.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price2 | currency}}</p>
+                            <form name="quantity2">
+                                <div ng-hide="add2">
+                                    <p class="qnty">
+                                        <input id="qty2" ng-value="qty2" ng-model="qty2" type="number" name="points" autofocus step="1" min="0" max="7" />
+                                        <button ng-disabled="((qty2==0) || (qty2<0) || (qty2>7) || quantity2.$invalid)" ng-click="add2=true; addtocart(item2, qty2, price2,'add2')" ng-model="addtocart2" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add2">
+                                    <span>{{qty2}} item(s) added</span>
+                                    <button ng-click="add2=false; emptybox(item2, qty2, price2); qty2=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item3}}</h4>
+                        <img class="image" ng-src="Images/Epson.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price3 | currency}}</p>
+                            <form name="quantity3">
+                                <div ng-hide="add3">
+                                    <p class="qnty">
+                                        <input id="qty3" ng-value="qty3" ng-model="qty3" type="number" name="points" autofocus step="1" min="0" max="2" />
+                                        <button ng-disabled="((qty3==0) || (qty3<0) || (qty3>2) || quantity3.$invalid)" ng-click="addtocart(item3, qty3, price3,'add3'); add3=true" ng-model="addtocart3" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add3">
+                                    <span>{{qty3}} item(s) added</span>
+                                    <button ng-click="add3=false; emptybox(item3, qty3, price3); qty3=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item4}}</h4>
+                        <img class="image" ng-src="Images/Huawei GX8.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price4 | currency}}</p>
+                            <form name="quantity4">
+                                <div ng-hide="add4">
+                                    <p class="qnty">
+                                        <input id="qty1" ng-value="qty4" ng-model="qty4" type="number" name="points" autofocus step="1" min="0" max="7" />
+                                        <button ng-disabled="((qty4==0) || (qty4<0) || (qty4>7) || quantity4.$invalid)" ng-click="addtocart(item4, qty4, price4, 'add4'); add4=true" ng-model="addtocart4" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add4">
+                                    <span>{{qty4}} item(s) added</span>
+                                    <button ng-click="add4=false; emptybox(item4, qty4, price4); qty4=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item5}}</h4>
+                        <img class="image" ng-src="Images/iPhone Case.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price5 | currency}}</p>
+                            <form name="quantity5">
+                                <div ng-hide="add5">
+                                    <p class="qnty">
+                                        <input id="qty1" ng-value="qty5" ng-model="qty5" type="number" name="points" autofocus step="1" min="0" max="20" />
+                                        <button ng-disabled="((qty5==0) || (qty5<0) || (qty5>20) || quantity5.$invalid)" ng-click="addtocart(item5, qty5, price5, 'add5'); add5=true" ng-model="addtocart5" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add5">
+                                    <span>{{qty5}} item(s) added</span>
+                                    <button ng-click="add5=false; emptybox(item5, qty5, price5); qty5=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item6}}</h4>
+                        <img class="image" ng-src="Images/Inear.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price6 | currency}}</p>
+                            <form name="quantity6">
+                                <div ng-hide="add6">
+                                    <p class="qnty">
+                                        <input id="qty1" ng-value="qty6" ng-model="qty6" type="number" name="points" autofocus step="1" min="0" max="8" />
+                                        <button ng-disabled="((qty6==0) || (qty6<0) || (qty6>8) || quantity6.$invalid)" ng-click="addtocart(item6, qty6, price6, 'add6'); add6=true" ng-model="addtocart6" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add6">
+                                    <span>{{qty6}} item(s) added</span>
+                                    <button ng-click="add6=false; emptybox(item6, qty6, price6); qty6=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item7}}</h4>
+                        <img class="image" ng-src="Images/range_extender.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price7 | currency}}</p>
+                            <form name="quantity7">
+                                <div ng-hide="add7">
+                                    <p class="qnty">
+                                        <input id="qty1" ng-value="qty7" ng-model="qty7" type="number" name="points" autofocus step="1" min="0" max="5" />
+                                        <button ng-disabled="((qty7==0) || (qty7<0) || (qty7>5) || quantity7.$invalid)" ng-click="addtocart(item7, qty7, price7,'add7'); add7=true" ng-model="addtocart7" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add7">
+                                    <span>{{qty7}} item(s) added</span>
+                                    <button ng-click="add7=false; emptybox(item7, qty7, price7); qty7=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail well well-sm">
+                        <h4>{{item8}}</h4>
+                        <img class="image" ng-src="Images/wireless_charger.jpg" alt="image1" />
+                        <div class="caption">
+                            <p>Pooping rainbow while flying in a toasted bread costume in space chase ball of string chew foot, and poop on grasses.</p>
+                            <p class="price">{{price8 | currency}}</p>
+                            <form name="quantity8">
+                                <div ng-hide="add8">
+                                    <p class="qnty">
+                                        <input id="qty1" ng-value="qty8" ng-model="qty8" type="number" name="points" autofocus step="1" min="0" max="8" />
+                                        <button ng-disabled="((qty8==0) || (qty8<0) || (qty8>8) || quantity8.$invalid)" ng-click="add8=true; addtocart(item8, qty8, price8, 'add8')" ng-model="addtocart8" class="btn btn-primary btn-sm" type="submit">Add to Cart!</button>
+                                    </p>
+                                </div>
+                                <div ng-show="add8">
+                                    <span>{{qty8}} item(s) added</span>
+                                    <button ng-click="add8=false; emptybox(item8, qty8, price8); qty8=1" class="btn btn-primary btn-sm" type="reset">Remove Item(s)</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-up">
+                <a href="#"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div ng-show="cartpage">
+            <table class="table table-striped">
+                <thead>
+                    <tr id="tablehead">
+                        <th></th>
+                        <th></th>
+                        <th id="quantityhead">Quantity</th>
+                        <th>Amount</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <th ng-show="emptycart" id="noitem">No Item in the Cart</th>                    
+                    </tr>
+                </thead>
+                <tr>
+                    <th ng-show="newcartmsg" id="redirecting">
+                        Redirecting <i class="fa fa-spinner fa-spin fa-3x fa-fw margin-bottom"></i>
+                        <span class="sr-only">Loading...</span>
+                    </th>
+                </tr>
+                
+                <tbody ng-hide="cartelements">
+                    <tr id="items" ng-repeat="item in items">
+                        <td>
+                            <button class="glyphicon glyphicon-trash" ng-click="removefromcart($index)"></button>
+                        </td>
+                        <td>{{item.name}}</td>
+                        <td id="quantity">{{item.qty}}</td>
+                        <td>{{item.price | currency}}</td>
+                        <td>{{item.totalprice | currency}}</td>
+                    </tr>
+
+                    <tr id="calc">
+                        <td></td>
+                        <td>Total Items</td>
+                        <td><center>{{totalitems}}</center></td>
+                        <td>Tax(13%)</td>
+                        <td>{{tax | currency}}</td>
+                    </tr>
+                    <tr id="calc">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Shipping</td>
+                        <td>{{shipping | currency}}</td>
+                    </tr>
+                    <tr id="calc">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Subtotal</td>
+                        <td>{{subtotal | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+           
+           
+            <!-- Trigger the modal with a button -->
+            <button ng-hide="cartelements" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" type="submit">Proceed To Checkout</button>
+            
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Internal Server Error 500</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>This is a practice assignment</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i class="icon-up-open">
+
+        </i>
+       
+    </div>
+   
+</body>
+
+</html>
